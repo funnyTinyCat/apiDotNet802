@@ -7,7 +7,6 @@ namespace api.Mappers
     public static class CommentMapper
     {
      
-
         public static CommentDto ToCommentDto(this Comment commentModel) {
 
             return new CommentDto {

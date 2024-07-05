@@ -1,7 +1,9 @@
 using api.Data;
 using api.Interfaces;
 using api.Repository;
+using api.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 // added now
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -36,6 +38,8 @@ builder.Services.AddDbContext<ApplicationDBContext>(options => {
 
 builder.Services.AddScoped<IStockRepository, StockRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<ILijekRepository, LijekRepository>();
+builder.Services.AddScoped<IFileService, FileService>();
 
 var app = builder.Build();
 
@@ -49,7 +53,15 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.MapControllers();
-
+// added because of file upload:
+app.UseHttpsRedirection();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(builder.Environment.ContentRootPath, "Uploads")
+    ), 
+    RequestPath ="/Resources"
+});
 // added now
 app.UseCors(MyAllowSpecificOrigins);
 
