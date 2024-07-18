@@ -51,6 +51,23 @@ namespace api.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("api.Models.Gender", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Genders");
+                });
+
             modelBuilder.Entity("api.Models.Lijek", b =>
                 {
                     b.Property<int>("Id")
@@ -83,6 +100,56 @@ namespace api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Lijekovi");
+                });
+
+            modelBuilder.Entity("api.Models.Location", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<float>("Lat")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Lng")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Locations");
+                });
+
+            modelBuilder.Entity("api.Models.Post", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("OwnerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
+
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("api.Models.Stock", b =>
@@ -119,6 +186,58 @@ namespace api.Migrations
                     b.ToTable("Stock");
                 });
 
+            modelBuilder.Entity("api.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateOnly?>("Birthday")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Firstname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("GenderId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Lastname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("LocationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Mobile")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("VisibleGender")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GenderId");
+
+                    b.HasIndex("LocationId");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("api.Models.Comment", b =>
                 {
                     b.HasOne("api.Models.Stock", "Stock")
@@ -126,6 +245,40 @@ namespace api.Migrations
                         .HasForeignKey("StockId");
 
                     b.Navigation("Stock");
+                });
+
+            modelBuilder.Entity("api.Models.Post", b =>
+                {
+                    b.HasOne("api.Models.User", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId");
+
+                    b.Navigation("Owner");
+                });
+
+            modelBuilder.Entity("api.Models.User", b =>
+                {
+                    b.HasOne("api.Models.Gender", "Gender")
+                        .WithMany("Users")
+                        .HasForeignKey("GenderId");
+
+                    b.HasOne("api.Models.Location", "Location")
+                        .WithMany("Users")
+                        .HasForeignKey("LocationId");
+
+                    b.Navigation("Gender");
+
+                    b.Navigation("Location");
+                });
+
+            modelBuilder.Entity("api.Models.Gender", b =>
+                {
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("api.Models.Location", b =>
+                {
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("api.Models.Stock", b =>

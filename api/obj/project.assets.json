@@ -4711,19 +4711,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\palig\\.nuget\\packages\\": {}
+    "C:\\Users\\opali\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\palig\\Documents\\csharp\\apiDotNet8\\api\\api.csproj",
+      "projectUniqueName": "C:\\Users\\opali\\OneDrive\\Documents\\csharp\\apiDotNet8\\api\\api.csproj",
       "projectName": "api",
-      "projectPath": "c:\\Users\\palig\\Documents\\csharp\\apiDotNet8\\api\\api.csproj",
-      "packagesPath": "C:\\Users\\palig\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\palig\\Documents\\csharp\\apiDotNet8\\api\\obj\\",
+      "projectPath": "C:\\Users\\opali\\OneDrive\\Documents\\csharp\\apiDotNet8\\api\\api.csproj",
+      "packagesPath": "C:\\Users\\opali\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\opali\\OneDrive\\Documents\\csharp\\apiDotNet8\\api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\palig\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\opali\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4811,7 +4811,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

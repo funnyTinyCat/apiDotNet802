@@ -16,7 +16,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       policy  =>
                       {
-                          policy.WithOrigins("http://localhost:4200")
+                          policy.WithOrigins("http://localhost:4200", "http://localhost:61043")
                             .AllowAnyHeader()
                             .AllowAnyMethod();
                                                  
@@ -40,6 +40,10 @@ builder.Services.AddScoped<IStockRepository, StockRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<ILijekRepository, LijekRepository>();
 builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IGenderRepository, GenderRepository>();
+builder.Services.AddScoped<ILocationRepository, LocationRepository>();
+builder.Services.AddScoped<IPostRepository, PostRepository>();
 
 var app = builder.Build();
 

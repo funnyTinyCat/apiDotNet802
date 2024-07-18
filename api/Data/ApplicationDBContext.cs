@@ -18,6 +18,10 @@ namespace api.Data
         public DbSet<Stock> Stock { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Lijek> Lijekovi { get; set; }
+        public DbSet<Gender> Genders { get; set; }
+        public DbSet<Location> Locations { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Post> Posts {get; set;}
         
     }
 }
