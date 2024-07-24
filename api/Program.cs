@@ -4,6 +4,7 @@ using api.Repository;
 using api.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Options;
 
 // added now
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -13,14 +14,37 @@ var builder = WebApplication.CreateBuilder(args);
 // added now
 builder.Services.AddCors(options =>
 {
+    /*
+    options.AddDefaultPolicy(builder =>
+                        {
+                            builder.SetIsOriginAllowed(origin => new Uri(origin).IsLoopback)  // new Uri(origin).IsLoopback  // new Uri(origin).Host == "localhost"
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                        });
+
+options.AddDefaultPolicy(
+        policy =>
+        {
+            policy.WithOrigins("http://example.com",
+                                "http://www.contoso.com");
+        });
+
+                        */
+
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       policy  =>
                       {
-                          policy.WithOrigins("http://localhost:4200", "http://localhost:61043")
+                        policy.AllowAnyOrigin()
                             .AllowAnyHeader()
                             .AllowAnyMethod();
+                            /*
+                          policy.WithOrigins("http://localhost", "http://127.0.0.1")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                            */
                                                  
-                      });
+                      });               
+    
 });
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -52,6 +76,9 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+   
+    
 }
 
 app.UseHttpsRedirection();

@@ -20,14 +20,9 @@ namespace api.Repository
             this._context = context;
         }
 
-        public async Task<Post> CreateAsync(CreatePostDto postDto)
+        public async Task<Post> CreateAsync(Post post)
         {
-            Post post = new Post();
-
-            post.Date = DateTime.Now;
-            post.Image = null;
-            post.Message = postDto.Message;
-            post.OwnerId = postDto.OwnerId;
+          
 
             await _context.Posts.AddAsync(post);
             await _context.SaveChangesAsync();

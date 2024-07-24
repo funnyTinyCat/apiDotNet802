@@ -12,7 +12,7 @@ namespace api.Interfaces
         //
         Task<List<Post>> GetAllAsync();
         Task<Post?> GetByIdAsync(int id);
-        Task<Post> CreateAsync(CreatePostDto postDto);
+        Task<Post> CreateAsync(Post post);
       
     }
 }

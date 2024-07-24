@@ -75,16 +75,30 @@ namespace api.Controllers
             if(!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if (await _postRepo.CreateAsync(postDto)) {
+            if ((await _userRepo.UserExistsAsync(postDto.OwnerId)) == false) {
 
-
-
+                return BadRequest("Owner is not found.");
             }
 
+            var owner = await _userRepo.GetByIdAsync(postDto.OwnerId);
 
+            if (owner == null) {
 
-            return Ok()
+                return BadRequest("Owner is not yet fount.");
+            }
 
+            var postModel = postDto.ToPostFromCreateDto(owner);
+
+            await _postRepo.CreateAsync(postModel);
+
+            return CreatedAtAction(nameof(GetById), new {id = postModel.Id}, postModel);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Upload() {
+
+            //
         }
     }
 }

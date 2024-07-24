@@ -18,7 +18,19 @@ namespace api.Repository
         {
             this._context = context;
         }
-        
+
+        public async Task<User?> GetByIdAsync(int? id)
+        {
+            var existingUser = await _context.Users.FirstOrDefaultAsync(s => s.Id == id);
+
+            if (existingUser == null) {
+
+                return null;
+            }
+
+            return existingUser;
+        }
+
         public async Task<User?> GetByUsernameAndPasswordAsync(string username, string password)
         {
             var existingUser = await _context.Users.FirstOrDefaultAsync(s => s.Username == username && s.Password == password);
@@ -31,7 +43,7 @@ namespace api.Repository
             return existingUser;
         }
 
-        public async  Task<UserForPostDto?> GetUserForPostAsync(int id)
+        public async  Task<UserForPostDto?> GetUserForPostAsync(int? id)
         {
             var existingUser = await _context.Users.FirstOrDefaultAsync(s => s.Id == id);
 
@@ -49,9 +61,16 @@ namespace api.Repository
             return userDto;
         }
 
-        public Task<bool> UserExistsAsync(int id)
+        public async Task<bool> UserExistsAsync(int? id)
         {
-            throw new NotImplementedException();
+            var existingUser = await _context.Users.FindAsync(id);
+
+            if ( existingUser == null) {
+
+                return false;
+            }
+
+            return true;
         }
     }
 }

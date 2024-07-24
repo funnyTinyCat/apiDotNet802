@@ -8,7 +8,7 @@ namespace api.Dtos.Post
     public class CreatePostDto
     {
         public String? Message { get; set; }
-        public int OwnerId { get; set; }
+        public int? OwnerId { get; set; }
         public DateTime? Date { get; set; }
         public String? Image { get; set; }
     }

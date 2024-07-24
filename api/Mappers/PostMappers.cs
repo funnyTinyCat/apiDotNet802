@@ -22,6 +22,19 @@ namespace api.Mappers
                 Image = postModel.Image,
             };      
         }
+
+        //
+        public static Post ToPostFromCreateDto(this CreatePostDto postDto, User owner) {
+
+            return new Post {
+
+                Message = postDto.Message,
+                OwnerId = postDto.OwnerId,
+                Owner = owner,
+                Date = DateTime.Now,
+                Image = postDto.Image,
+            };
+        }
     }
 }
 /*

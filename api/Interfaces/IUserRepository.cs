@@ -11,7 +11,8 @@ namespace api.Interfaces
     {
         Task<User?> GetByUsernameAndPasswordAsync(string username, string password);
 
-        Task<UserForPostDto?> GetUserForPostAsync(int id);
-        Task<Boolean> UserExistsAsync(int id);
+        Task<UserForPostDto?> GetUserForPostAsync(int? id);
+        Task<Boolean> UserExistsAsync(int? id);
+        Task<User?> GetByIdAsync(int? id);
     }
 }
